@@ -1,0 +1,28 @@
+{
+  "name": "digital-twin-health-tracker",
+  "version": "1.0.0",
+  "description": "Health Activity Tracking System for Digital Twin",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "seed": "node src/seed.js",
+    "test": "node --test tests/api.test.js",
+    "test:ui": "playwright test",
+    "test:ui:headed": "playwright test --headed",
+    "test:ui:debug": "playwright test --debug"
+  },
+  "keywords": ["health", "digital-twin", "tracking"],
+  "license": "MIT",
+  "dependencies": {
+    "better-sqlite3": "^11.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.0",
+    "express": "^4.21.0",
+    "express-validator": "^7.2.0"
+  },
+  "devDependencies": {
+    "supertest": "^7.0.0",
+    "@playwright/test": "^1.42.0"
+  }
+}

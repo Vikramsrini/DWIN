@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DWIN - Test Report</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: #f5f5f5;
+        }
+        .report {
+            background: white;
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            font-size: 28px;
+            margin-bottom: 10px;
+            border-bottom: 3px solid #27ae60;
+            padding-bottom: 15px;
+        }
+        .meta {
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+        .summary {
+            background: #d4edda;
+            border-left: 4px solid #27ae60;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+        }
+        .summary h2 {
+            color: #155724;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .stats {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #27ae60;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+        }
+        h2 {
+            color: #2c3e50;
+            font-size: 22px;
+            margin: 35px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        th {
+            background: #34495e;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        tr:hover {
+            background: #f8f9fa;
+        }
+        .endpoint {
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 12px;
+            color: #e74c3c;
+            background: #fdf2f2;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+        .pass {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .badge-green {
+            background: #d4edda;
+            color: #155724;
+        }
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ecf0f1;
+            color: #7f8c8d;
+            font-size: 12px;
+            text-align: center;
+        }
+        @media print {
+            body { background: white; }
+            .report { box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="report">
+        <h1>DWIN - Integration Test Report</h1>
+        <div class="meta">
+            <strong>Test Report</strong> | File: tests/api.test.js | Generated: April 15, 2026
+        </div>
+
+        <div class="summary">
+            <h2>Test Summary <span class="badge badge-green">ALL PASSING</span></h2>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value">22</div>
+                    <div class="stat-label">Total Tests</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">22</div>
+                    <div class="stat-label">Passed</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">Failed</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">4</div>
+                    <div class="stat-label">Test Suites</div>
+                </div>
+            </div>
+        </div>
+
+        <h2>1. Users Suite <span class="badge badge-green">7 tests</span></h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Test Case</th>
+                    <th>Endpoint</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Create a user with valid data</td>
+                    <td><span class="endpoint">POST /api/users</span></td>
+                    <td class="pass">✓ PASS</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>List all users</td>
+                    <td><span class="endpoint">GET /api/users</span></td>
+                    <td class="pass">✓ PASS</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Get user by ID</td>
+                    <td><span class="endpoint">GET /api/users/:id</span></td>
+                    <td class="pass">✓ PASS</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>404 for non-existent user</td>
+                    <td><span class="endpoint">GET /api/users/999</span></td>
+                    <td class="pass">✓ PASS</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Update user name</td>
+                    <td><span class="endpoint">PUT /api/users/:id</span></td>
+                    <td class="pass">✓ PASS</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>409 for duplicate email</td>
+                    <td><span class="endpoint">POST /api/users</span></td>
+                    <td class="pass">✓ PASS</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>400 validation error (missing name)</td>
+                    <td><span class="endpoint">POST /api/users</span></td>
+                    <td class="pass">✓ PASS</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>2. Activities Suite <span class="badge badge-green">12 tests</span></h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Test Case</th>
+                    <th>Endpoint</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>8</td>
+                    <td>Log calories activity (500 kcal)</td>
+                    <td><span class="endpoint">POST /api/users/:id/activities</span></td>
+                    <td class="pass">✓ PASS</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>Log sleep activity (7.5 hours)</td>
+                    <td><span class="endpoint">POST /api/users/:id/activities</span></td>
+                    <td class="pass">✓ PASS</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>Log exercise activity (45 minutes)</td>
+                    <td><span class="endpoint">POST /api/users/:id/activities</span></td>
+                    <td class="pass">✓ PASS</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>Log hygiene activity (score 8)</td>
+                    <td><span class="endpoint">POST /api/users/:id/activities</span></td>
+                    <td class="pass">✓ PASS</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>List all activities</td>
+                    <td><span class="endpoint">GET /api/users/:id/activities</span></td>
+                    <td class="pass">✓ PASS</td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>Filter by type (sleep)</td>
+                    <td><span class="endpoint">GET /api/users/:id/activities?type=sleep</span></td>
+                    <td class="pass">✓ PASS</td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td>Filter by date (2026-03-13)</td>
+                    <td><span class="endpoint">GET /api/users/:id/activities?date=2026-03-13</span></td>
+                    <td class="pass">✓ PASS</td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td>Get single activity by ID</td>
+                    <td><span class="endpoint">GET /api/users/:id/activities/:id</span></td>
+                    <td class="pass">✓ PASS</td>
+                </tr>
+                <tr>
+                    <td>16</td>
+                    <td>Update activity value</td>
+                    <td><span class="endpoint">PUT /api/users/:id/activities/:id</span></td>
+                    <td class="pass">✓ PASS</td>
+                </tr>
+                <tr>
+                    <td>17</td>
+                    <td>400 for invalid activity type</td>
+                    <td><span class="endpoint">POST /api/users/:id/activities</span></td>
+                    <td class="pass">✓ PASS</td>
+                </tr>
+                <tr>
+                    <td>18</td>
+                    <td>404 for non-existent user</td>
+                    <td><span class="endpoint">POST /api/users/999/activities</span></td>
+                    <td class="pass">✓ PASS</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. Twin Status Suite <span class="badge badge-green">2 tests</span></h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Test Case</th>
+                    <th>Endpoint</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>19</td>
+                    <td>Get twin status with aggregated data</td>
+                    <td><span class="endpoint">GET /api/users/:id/twin-status</span></td>
+                    <td class="pass">✓ PASS</td>
+                </tr>
+                <tr>
+                    <td>20</td>
+                    <td>404 for non-existent user</td>
+                    <td><span class="endpoint">GET /api/users/999/twin-status</span></td>
+                    <td class="pass">✓ PASS</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>4. Cleanup Suite <span class="badge badge-green">2 tests</span></h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Test Case</th>
+                    <th>Endpoint</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>21</td>
+                    <td>Delete activity (204)</td>
+                    <td><span class="endpoint">DELETE /api/users/:id/activities/:id</span></td>
+                    <td class="pass">✓ PASS</td>
+                </tr>
+                <tr>
+                    <td>22</td>
+                    <td>Delete user with cascade</td>
+                    <td><span class="endpoint">DELETE /api/users/:id</span></td>
+                    <td class="pass">✓ PASS</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Valid Activity Types</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Unit</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="endpoint">calories</span></td>
+                    <td>kcal</td>
+                    <td>Calorie intake tracking</td>
+                </tr>
+                <tr>
+                    <td><span class="endpoint">sleep</span></td>
+                    <td>hours</td>
+                    <td>Sleep duration tracking</td>
+                </tr>
+                <tr>
+                    <td><span class="endpoint">exercise</span></td>
+                    <td>minutes</td>
+                    <td>Exercise duration tracking</td>
+                </tr>
+                <tr>
+                    <td><span class="endpoint">hygiene</span></td>
+                    <td>score</td>
+                    <td>Hygiene rating (1-10)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="footer">
+            <p>Health Activity Tracking API | Test Framework: Node.js Test Runner + Supertest</p>
+            <p>Database: SQLite | Test Database: ./data/test-health.db</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Digital Twin Health Activity Tracking Dashboard - Monitor calories, sleep, hygiene, and exercise in real-time">
+  <title>Digital Twin — Health Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-left">
+      <div class="logo">
+        <span class="logo-icon">🧬</span>
+        <h1>Digital Twin</h1>
+      </div>
+      <span class="header-subtitle">Health Activity Tracker</span>
+    </div>
+    <div class="header-right">
+      <div class="user-profile">
+        <span class="user-name" id="loggedInUserName"></span>
+        <button id="btnLogout" class="btn-logout" title="Logout">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+        </button>
+      </div>
+      <div class="date-display" id="dateDisplay"></div>
+    </div>
+  </header>
+
+  <main class="main">
+    <!-- Digital Twin Panel -->
+    <section class="twin-panel" id="twinPanel">
+      <div class="twin-avatar-container">
+        <div class="twin-aura" id="twinAura"></div>
+        <div class="twin-avatar" id="twinAvatar">
+          <div class="avatar-body">
+            <div class="avatar-head">
+              <div class="avatar-face">
+                <div class="avatar-eyes">
+                  <span class="eye left"></span>
+                  <span class="eye right"></span>
+                </div>
+                <div class="avatar-mouth" id="avatarMouth"></div>
+              </div>
+            </div>
+            <div class="avatar-torso"></div>
+          </div>
+          <div class="heartbeat-line" id="heartbeatLine">
+            <svg viewBox="0 0 200 50" preserveAspectRatio="none">
+              <polyline id="heartbeatPath" fill="none" stroke-width="2" points=""/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="twin-info">
+        <h2 id="twinName">Loading...</h2>
+        <div class="twin-health-badge" id="twinHealthBadge">
+          <span class="badge-dot"></span>
+          <span class="badge-text">Analyzing...</span>
+        </div>
+        <p class="twin-summary" id="twinSummary">Gathering health data...</p>
+      </div>
+    </section>
+
+    <!-- Activity Cards -->
+    <section class="activity-cards" id="activityCards">
+      <div class="activity-card card-calories" id="cardCalories" data-type="calories">
+        <div class="card-header">
+          <span class="card-icon">🔥</span>
+          <h3>Calories</h3>
+        </div>
+        <div class="card-ring-container">
+          <svg class="progress-ring" viewBox="0 0 120 120">
+            <circle class="ring-bg" cx="60" cy="60" r="52"/>
+            <circle class="ring-fill" id="ringCalories" cx="60" cy="60" r="52"/>
+          </svg>
+          <div class="card-value">
+            <span class="value-number" id="valCalories">0</span>
+            <span class="value-unit">kcal</span>
+          </div>
+        </div>
+        <div class="card-rating" id="ratingCalories">—</div>
+      </div>
+
+      <div class="activity-card card-sleep" id="cardSleep" data-type="sleep">
+        <div class="card-header">
+          <span class="card-icon">😴</span>
+          <h3>Sleep</h3>
+        </div>
+        <div class="card-ring-container">
+          <svg class="progress-ring" viewBox="0 0 120 120">
+            <circle class="ring-bg" cx="60" cy="60" r="52"/>
+            <circle class="ring-fill" id="ringSleep" cx="60" cy="60" r="52"/>
+          </svg>
+          <div class="card-value">
+            <span class="value-number" id="valSleep">0</span>
+            <span class="value-unit">hrs</span>
+          </div>
+        </div>
+        <div class="card-rating" id="ratingSleep">—</div>
+      </div>
+
+      <div class="activity-card card-hygiene" id="cardHygiene" data-type="hygiene">
+        <div class="card-header">
+          <span class="card-icon">🧼</span>
+          <h3>Hygiene</h3>
+        </div>
+        <div class="card-ring-container">
+          <svg class="progress-ring" viewBox="0 0 120 120">
+            <circle class="ring-bg" cx="60" cy="60" r="52"/>
+            <circle class="ring-fill" id="ringHygiene" cx="60" cy="60" r="52"/>
+          </svg>
+          <div class="card-value">
+            <span class="value-number" id="valHygiene">0</span>
+            <span class="value-unit">/10</span>
+          </div>
+        </div>
+        <div class="card-rating" id="ratingHygiene">—</div>
+      </div>
+
+      <div class="activity-card card-exercise" id="cardExercise" data-type="exercise">
+        <div class="card-header">
+          <span class="card-icon">💪</span>
+          <h3>Exercise</h3>
+        </div>
+        <div class="card-ring-container">
+          <svg class="progress-ring" viewBox="0 0 120 120">
+            <circle class="ring-bg" cx="60" cy="60" r="52"/>
+            <circle class="ring-fill" id="ringExercise" cx="60" cy="60" r="52"/>
+          </svg>
+          <div class="card-value">
+            <span class="value-number" id="valExercise">0</span>
+            <span class="value-unit">min</span>
+          </div>
+        </div>
+        <div class="card-rating" id="ratingExercise">—</div>
+      </div>
+    </section>
+
+    <!-- Charts Section -->
+    <section class="charts-section" id="chartsSection">
+      <h2 class="section-title">7-Day Trends</h2>
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h4>🔥 Calories</h4>
+          <canvas id="chartCalories"></canvas>
+        </div>
+        <div class="chart-card">
+          <h4>😴 Sleep</h4>
+          <canvas id="chartSleep"></canvas>
+        </div>
+        <div class="chart-card">
+          <h4>🧼 Hygiene</h4>
+          <canvas id="chartHygiene"></canvas>
+        </div>
+        <div class="chart-card">
+          <h4>💪 Exercise</h4>
+          <canvas id="chartExercise"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- Activity History -->
+    <section class="history-section" id="historySection">
+      <h2 class="section-title">Recent Activities</h2>
+      <div class="history-list" id="historyList">
+        <div class="history-placeholder">Loading activities...</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FAB (Floating Action Button) -->
+  <button class="fab" id="fabAdd" title="Log Activity">
+    <span>+</span>
+  </button>
+
+  <!-- Log Activity Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="activityModal">
+      <div class="modal-header">
+        <h2 id="modalTitle">Log Activity</h2>
+        <button class="modal-close" id="modalClose">×</button>
+      </div>
+      <form id="activityForm">
+        <input type="hidden" id="editActivityId" value="">
+        <div class="form-group">
+          <label for="actType">Activity Type</label>
+          <div class="type-selector" id="typeSelector">
+            <button type="button" class="type-btn active" data-type="calories" data-unit="kcal">🔥 Calories</button>
+            <button type="button" class="type-btn" data-type="sleep" data-unit="hours">😴 Sleep</button>
+            <button type="button" class="type-btn" data-type="hygiene" data-unit="score">🧼 Hygiene</button>
+            <button type="button" class="type-btn" data-type="exercise" data-unit="minutes">💪 Exercise</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="actValue">Value</label>
+          <div class="input-with-unit">
+            <input type="number" id="actValue" step="0.1" min="0" required placeholder="Enter value">
+            <span class="input-unit" id="actUnit">kcal</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="actDate">Date</label>
+          <input type="date" id="actDate" required>
+        </div>
+        <div class="form-group">
+          <label for="actNotes">Notes <span class="optional">(optional)</span></label>
+          <textarea id="actNotes" rows="2" placeholder="Add any notes..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit" id="btnSubmit">
+          <span class="btn-text">Log Activity</span>
+          <span class="btn-loader" hidden></span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/twin.js"></script>
+  <script src="/js/charts.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>
